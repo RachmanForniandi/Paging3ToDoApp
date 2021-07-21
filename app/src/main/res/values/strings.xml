@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Paging3ToDoApp</string>
+
+    <string name="home">Home</string>
+    <string name="flow">Flow</string>
+    <string name="flow_rm">Flow RM</string>
+    <string name="rxjava">RxJava</string>
+    <string name="rxjava_rm">RxJava RM</string>
+    <string name="error_no_internet_connection">Sorry! No internet connection</string>
+    <string name="retry">Retry</string>
+</resources>

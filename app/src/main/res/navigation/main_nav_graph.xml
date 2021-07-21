@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav_graph"
+    app:startDestination="@id/nav_flow">
+
+    <fragment
+        android:id="@+id/nav_flow"
+        android:name="com.richarddewan.paging3_todo.ui.FlowPagingSourceFragment"
+        android:label="FlowPagingSource" />
+    <fragment
+        android:id="@+id/nav_rxjava"
+        android:name="com.richarddewan.paging3_todo.ui.FlowRemoteMediatorFragment"
+        android:label="FlowRemoteMediatorFragment" />
+    <fragment
+        android:id="@+id/nav_flow_rm"
+        android:name="com.richarddewan.paging3_todo.ui.RxPagingSourceFragment"
+        android:label="RxPagingSourceFragment" />
+    <fragment
+        android:id="@+id/nav_rxjava_rm"
+        android:name="com.richarddewan.paging3_todo.ui.RxRemoteMediatorFragment"
+        android:label="RxRemoteMediatorFragment" />
+</navigation>

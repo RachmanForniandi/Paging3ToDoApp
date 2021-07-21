@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_flow"
+        android:icon="@drawable/ic_action_flow"
+        android:title="@string/flow" />
+    <item
+        android:id="@+id/nav_flow_rm"
+        android:icon="@drawable/ic_action_rx"
+        android:title="@string/flow_rm" />
+    <item
+        android:id="@+id/nav_rxjava"
+        android:icon="@drawable/ic_action_flow"
+        android:title="@string/rxjava" />
+    <item
+        android:id="@+id/nav_rxjava_rm"
+        android:icon="@drawable/ic_action_rx"
+        android:title="@string/rxjava_rm" />
+
+</menu>
