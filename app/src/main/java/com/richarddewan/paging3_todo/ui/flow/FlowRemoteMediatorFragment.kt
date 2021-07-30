@@ -1,4 +1,4 @@
-package com.richarddewan.paging3_todo.ui
+package com.richarddewan.paging3_todo.ui.flow
 
 import android.os.Bundle
 import android.view.LayoutInflater
