@@ -8,4 +8,5 @@
     <string name="rxjava_rm">RxJava RM</string>
     <string name="error_no_internet_connection">Sorry! No internet connection</string>
     <string name="retry">Retry</string>
+    <string name="close">Close</string>
 </resources>
