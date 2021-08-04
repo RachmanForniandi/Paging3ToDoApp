@@ -4,7 +4,7 @@ import android.app.Application
 import com.richarddewan.paging3_todo.netConfig.NetworkConfig
 import com.richarddewan.paging3_todo.netConfig.NetworkService
 
-class MyApplication:Application() {
+class MyApplication: Application()  {
     lateinit var networkService:NetworkService
     private val baseUrl:String ="https://freeapi.rdewan.dev/"
 

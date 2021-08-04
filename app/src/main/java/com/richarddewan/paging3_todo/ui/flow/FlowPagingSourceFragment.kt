@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.richarddewan.paging3_todo.MyApplication
+import com.richarddewan.paging3_todo.adapter.TaskPagingDataAdapter
 import com.richarddewan.paging3_todo.data.repository.flow.TaskFlowRepositoryImpl
 import com.richarddewan.paging3_todo.data.repository.paging.TaskFlowPagingSource
 import com.richarddewan.paging3_todo.databinding.FragmentFlowPagingSourceBinding
@@ -26,6 +28,10 @@ class FlowPagingSourceFragment: Fragment() {
     private lateinit var viewModel: FlowViewModel
     private lateinit var repository: TaskFlowRepositoryImpl
     private lateinit var pagingSource: TaskFlowPagingSource
+    private lateinit var pagingDataAdapter: TaskPagingDataAdapter
+    private val linearLayoutManager:LinearLayoutManager by lazy {
+        LinearLayoutManager(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +41,8 @@ class FlowPagingSourceFragment: Fragment() {
         binding = FragmentFlowPagingSourceBinding.inflate(layoutInflater)
 
         //paging source
-        pagingSource = TaskFlowPagingSource(
-            (requireActivity().application as MyApplication).networkService)
+        pagingSource = TaskFlowPagingSource((requireActivity().application as MyApplication).networkService)
+
         //repository
         repository = TaskFlowRepositoryImpl(pagingSource)
 
@@ -44,12 +50,19 @@ class FlowPagingSourceFragment: Fragment() {
         viewModel = ViewModelProvider(this,ViewModelProviderFactory(FlowViewModel::class){
             FlowViewModel(repository)
         }).get(FlowViewModel::class.java)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        pagingDataAdapter = TaskPagingDataAdapter()
+
+        binding.listItemFlow.apply {
+            //layoutManager = linearLayoutManager
+            adapter = pagingDataAdapter
+        }
         //observe the live data from viewmodel
         observers()
     }
@@ -58,7 +71,7 @@ class FlowPagingSourceFragment: Fragment() {
         lifecycleScope.launch {
             viewModel.getTaskListPaging()
                 .collectLatest {
-
+                    pagingDataAdapter.submitData(lifecycle,it)
                 }
         }
     }
