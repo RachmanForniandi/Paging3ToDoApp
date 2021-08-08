@@ -1,4 +1,4 @@
-package com.richarddewan.paging3_todo
+package com.richarddewan.paging3_todo.util
 
 import android.app.Application
 import com.richarddewan.paging3_todo.netConfig.NetworkConfig

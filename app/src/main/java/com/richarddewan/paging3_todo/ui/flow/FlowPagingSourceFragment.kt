@@ -12,15 +12,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.google.common.io.Closeables.close
-import com.richarddewan.paging3_todo.MyApplication
+import com.richarddewan.paging3_todo.util.MyApplication
 import com.richarddewan.paging3_todo.R
 import com.richarddewan.paging3_todo.adapter.TaskPagingDataAdapter
 import com.richarddewan.paging3_todo.data.repository.flow.TaskFlowRepositoryImpl
 import com.richarddewan.paging3_todo.data.repository.paging.TaskFlowPagingSource
 import com.richarddewan.paging3_todo.databinding.FragmentFlowPagingSourceBinding
 import com.richarddewan.paging3_todo.ui.flow.viewmodel.FlowViewModel
-import com.richarddewan.paging3_todo.ui.flow.viewmodel.ViewModelProviderFactory
+import com.richarddewan.paging3_todo.util.AppHelper
+import com.richarddewan.paging3_todo.util.ViewModelProviderFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -53,7 +53,7 @@ class FlowPagingSourceFragment: Fragment() {
         repository = TaskFlowRepositoryImpl(pagingSource)
 
         //viewmodel
-        viewModel = ViewModelProvider(this,ViewModelProviderFactory(FlowViewModel::class){
+        viewModel = ViewModelProvider(this, ViewModelProviderFactory(FlowViewModel::class){
             FlowViewModel(repository)
         }).get(FlowViewModel::class.java)
 
@@ -83,7 +83,7 @@ class FlowPagingSourceFragment: Fragment() {
                 ?: loadState.prepend as? LoadState.Error
 
             errorState?.let {
-                    showErrorSnackBar(it.error.message.toString())
+                AppHelper.showErrorSnackBar(binding.pgFlow,requireActivity(),it.error.message.toString())
             }
 
         }
@@ -100,7 +100,7 @@ class FlowPagingSourceFragment: Fragment() {
         }
     }
 
-    private fun showErrorSnackBar(msg:String){
+    /*private fun showErrorSnackBar(msg:String){
         Snackbar.make(requireView(),msg,Snackbar.LENGTH_INDEFINITE).apply {
             setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.purple_700))
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -110,5 +110,5 @@ class FlowPagingSourceFragment: Fragment() {
             }
             anchorView = binding.pgFlow
         }.show()
-    }
+    }*/
 }
