@@ -13,10 +13,10 @@
         android:label="FlowRemoteMediatorFragment" />
     <fragment
         android:id="@+id/nav_flow_rm"
-        android:name="com.richarddewan.paging3_todo.ui.RxPagingSourceFragment"
+        android:name="com.richarddewan.paging3_todo.ui.rx.RxPagingSourceFragment"
         android:label="RxPagingSourceFragment" />
     <fragment
         android:id="@+id/nav_rxjava_rm"
-        android:name="com.richarddewan.paging3_todo.ui.RxRemoteMediatorFragment"
+        android:name="com.richarddewan.paging3_todo.ui.rx.RxRemoteMediatorFragment"
         android:label="RxRemoteMediatorFragment" />
 </navigation>
