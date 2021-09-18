@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Keep
-@Entity(tableName = "task_key")
+@Entity(tableName = "task_keys")
 data class TaskKeyEntity(
     @PrimaryKey
     val taskId:Long,
