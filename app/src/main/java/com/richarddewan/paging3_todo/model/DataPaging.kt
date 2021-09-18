@@ -9,6 +9,7 @@ data class DataPaging(
     val currentPage:Int =0,
     val tasks:List<Task>
 ){
+    val endPage = totalPage == currentPage
     @Keep
     data class Task(
         @SerializedName("id")
