@@ -1,4 +1,4 @@
-package com.richarddewan.paging3_todo.ui.flow.viewmodel
+package com.richarddewan.paging3_todo.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

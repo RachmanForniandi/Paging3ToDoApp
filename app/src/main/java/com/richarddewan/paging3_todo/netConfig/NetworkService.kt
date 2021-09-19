@@ -14,5 +14,5 @@ interface NetworkService {
 
     @Headers(CoreEndPoints.HEADER_ACCEPT)
     @GET(CoreEndPoints.URL_ALL_TASK)
-    suspend fun getTaskListRx(@Query("page")pageNumber:Int):Single<TaskResponse>
+    fun getTaskListRx(@Query("page")pageNumber:Int):Single<TaskResponse>
 }
