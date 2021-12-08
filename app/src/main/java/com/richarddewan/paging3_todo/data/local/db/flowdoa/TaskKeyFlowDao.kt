@@ -15,7 +15,7 @@ interface TaskKeyFlowDao {
     suspend fun insertMany(keys: List<TaskKeyEntity>)
 
     @Query("SELECT * FROM task_keys ORDER BY taskId =:taskId")
-    fun getTaskKeyByTaskId(taskId:Int): TaskEntity
+    suspend fun getTaskKeyByTaskId(taskId:Int): TaskKeyEntity
 
     @Query("DELETE FROM task_keys")
     suspend fun clearKeys()
