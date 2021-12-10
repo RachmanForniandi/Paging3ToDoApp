@@ -1,11 +1,13 @@
-package com.richarddewan.paging3_todo.data.local.db.rxdoa
+package com.richarddewan.paging3_todo.data.local.db.rxdao
 
 import androidx.paging.PagingSource
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.richarddewan.paging3_todo.data.local.entity.TaskEntity
 
+@Dao
 interface TaskRxDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMany(tasks: List<TaskEntity>)

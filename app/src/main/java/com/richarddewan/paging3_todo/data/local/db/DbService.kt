@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.richarddewan.paging3_todo.data.local.db.flowdoa.TaskFlowDao
 import com.richarddewan.paging3_todo.data.local.db.flowdoa.TaskKeyFlowDao
-import com.richarddewan.paging3_todo.data.local.db.rxdoa.TaskKeyRxDao
-import com.richarddewan.paging3_todo.data.local.db.rxdoa.TaskRxDao
+import com.richarddewan.paging3_todo.data.local.db.rxdao.TaskKeyRxDao
+import com.richarddewan.paging3_todo.data.local.db.rxdao.TaskRxDao
 import com.richarddewan.paging3_todo.data.local.entity.TaskEntity
 import com.richarddewan.paging3_todo.data.local.entity.TaskKeyEntity
 
