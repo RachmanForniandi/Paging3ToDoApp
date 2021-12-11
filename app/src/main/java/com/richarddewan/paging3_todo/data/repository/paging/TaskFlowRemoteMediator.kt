@@ -106,7 +106,6 @@ class TaskFlowRemoteMediator(private val networkService: NetworkService,
             }
 
         }
-
     }
 
     override fun mapToEntity(model: List<DataPaging.Task>): List<TaskEntity> {
@@ -142,5 +141,7 @@ class TaskFlowRemoteMediator(private val networkService: NetworkService,
             )
         }
     }
+
+
 }
 

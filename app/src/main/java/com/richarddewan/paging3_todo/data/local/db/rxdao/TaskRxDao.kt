@@ -10,11 +10,11 @@ import com.richarddewan.paging3_todo.data.local.entity.TaskEntity
 @Dao
 interface TaskRxDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMany(tasks: List<TaskEntity>)
+    fun insertMany(tasks: List<TaskEntity>)
 
     @Query("SELECT * FROM tasks ORDER BY id ASC")
     fun getTasks(): PagingSource<Int, TaskEntity>
 
     @Query("DELETE FROM tasks")
-    suspend fun clearTasks()
+    fun clearTasks()
 }
