@@ -12,7 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class RxViewModel(private val repository: TaskRxRepositoryImpl): ViewModel() {
 
     @ExperimentalCoroutinesApi
-    fun getRxTaskListPaging(): Flowable<PagingData<DataPaging.Task>> =
+    fun getRxTaskList(): Flowable<PagingData<DataPaging.Task>> =
         repository.getTaskListPaging()
             .cachedIn(viewModelScope)
 }
