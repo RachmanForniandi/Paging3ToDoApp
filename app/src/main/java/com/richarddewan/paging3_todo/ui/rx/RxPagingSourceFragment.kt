@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.richarddewan.paging3_todo.util.MyApplication
 import com.richarddewan.paging3_todo.R
+import com.richarddewan.paging3_todo.adapter.TaskLoadStateAdapter
 import com.richarddewan.paging3_todo.adapter.TaskPagingDataAdapter
 import com.richarddewan.paging3_todo.data.repository.paging.TaskRxPagingSource
 import com.richarddewan.paging3_todo.data.repository.rx.TaskRxRepositoryImpl
@@ -65,6 +66,14 @@ class RxPagingSourceFragment: Fragment() {
         binding.listItemRx.apply {
             adapter = pagingDataAdapter
         }
+
+        binding.listItemRx.adapter =
+            pagingDataAdapter.withLoadStateHeaderAndFooter(
+                header = TaskLoadStateAdapter{
+                    pagingDataAdapter.retry()},
+                footer = TaskLoadStateAdapter{
+                    pagingDataAdapter.retry()}
+            )
 
         pagingDataAdapter.addLoadStateListener { loadState->
             //show progress bar when the load state is loading
