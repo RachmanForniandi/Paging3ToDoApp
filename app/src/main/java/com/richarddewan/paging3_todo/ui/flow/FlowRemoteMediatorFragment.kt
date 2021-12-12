@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.richarddewan.paging3_todo.adapter.TaskLoadStateAdapter
 import com.richarddewan.paging3_todo.adapter.TaskRemoteMediatorDataAdapter
 import com.richarddewan.paging3_todo.data.repository.flow.TaskFlowRemoteMediatorRepositoryImpl
 import com.richarddewan.paging3_todo.data.repository.paging.TaskFlowRemoteMediator
@@ -76,10 +77,19 @@ class FlowRemoteMediatorFragment: Fragment() {
             adapter = remoteMediatorDataAdapter
         }
 
+        binding.listItemRemoteMediator.adapter =
+            remoteMediatorDataAdapter.withLoadStateHeaderAndFooter(
+                header = TaskLoadStateAdapter{
+                    remoteMediatorDataAdapter.retry()},
+                footer = TaskLoadStateAdapter{
+                    remoteMediatorDataAdapter.retry()}
+            )
+
         //load state
         remoteMediatorDataAdapter.addLoadStateListener {
             loadState->
-            binding.pgRemoteMediator.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.pgRemoteMediator.isVisible =
+                loadState.source.refresh is LoadState.Loading
 
             //load state for error and show the msg on UI
             val errorState = loadState.source.refresh as? LoadState.Error
@@ -91,7 +101,7 @@ class FlowRemoteMediatorFragment: Fragment() {
 
             errorState?.let {
                 AppHelper.showErrorSnackBar(
-                    binding.pgRemoteMediator,requireActivity(),
+                    binding.pgRemoteMediator,requireContext(),
                     it.error.message.toString()
                 )
             }
@@ -107,6 +117,7 @@ class FlowRemoteMediatorFragment: Fragment() {
             viewModel.getTaskList()
                 .collectLatest {
                     remoteMediatorDataAdapter.submitData(lifecycle,it)
+
                 }
         }
     }

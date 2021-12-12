@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.richarddewan.paging3_todo.adapter.TaskLoadStateAdapter
 import com.richarddewan.paging3_todo.adapter.TaskRemoteMediatorDataAdapter
 import com.richarddewan.paging3_todo.data.repository.paging.TaskFlowRemoteMediator
 import com.richarddewan.paging3_todo.data.repository.paging.TaskRxRemoteMediator
@@ -67,6 +68,14 @@ RxRemoteMediatorFragment: Fragment() {
             //layoutManager = linearLayoutManager
             adapter = remoteMediatorDataAdapter
         }
+
+        binding.listItemRxRemoteMediator.adapter =
+            remoteMediatorDataAdapter.withLoadStateHeaderAndFooter(
+                header = TaskLoadStateAdapter{
+                    remoteMediatorDataAdapter.retry()},
+                footer = TaskLoadStateAdapter{
+                    remoteMediatorDataAdapter.retry()}
+            )
 
         //load state
         remoteMediatorDataAdapter.addLoadStateListener { loadState ->

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.richarddewan.paging3_todo.util.MyApplication
 import com.richarddewan.paging3_todo.R
+import com.richarddewan.paging3_todo.adapter.TaskLoadStateAdapter
 import com.richarddewan.paging3_todo.adapter.TaskPagingDataAdapter
 import com.richarddewan.paging3_todo.data.repository.flow.TaskFlowRepositoryImpl
 import com.richarddewan.paging3_todo.data.repository.paging.TaskFlowPagingSource
@@ -69,6 +70,14 @@ class FlowPagingSourceFragment: Fragment() {
             //layoutManager = linearLayoutManager
             adapter = pagingDataAdapter
         }
+
+        binding.listItemFlow.adapter =
+            pagingDataAdapter.withLoadStateHeaderAndFooter(
+                header = TaskLoadStateAdapter{
+                    pagingDataAdapter.retry()},
+                footer = TaskLoadStateAdapter{
+                    pagingDataAdapter.retry()}
+            )
 
         pagingDataAdapter.addLoadStateListener { loadState->
             //show progress bar when the load state is loading
