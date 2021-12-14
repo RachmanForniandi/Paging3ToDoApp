@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.richarddewan.paging3_todo.adapter.TaskLoadStateAdapter
 import com.richarddewan.paging3_todo.adapter.TaskRemoteMediatorDataAdapter
+import com.richarddewan.paging3_todo.adapter.TaskUiModelAdapter
 import com.richarddewan.paging3_todo.data.repository.flow.TaskFlowRemoteMediatorRepositoryImpl
 import com.richarddewan.paging3_todo.data.repository.paging.TaskFlowRemoteMediator
 import com.richarddewan.paging3_todo.databinding.FragmentFlowPagingSourceBinding
@@ -43,6 +44,7 @@ class FlowRemoteMediatorFragment: Fragment() {
     private val linearLayoutManager: LinearLayoutManager by lazy {
         LinearLayoutManager(requireActivity())
     }
+    private lateinit var taskUiModelAdapter: TaskUiModelAdapter
 
     @ExperimentalPagingApi
     override fun onCreateView(
@@ -69,16 +71,18 @@ class FlowRemoteMediatorFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //setup adapter
-        remoteMediatorDataAdapter = TaskRemoteMediatorDataAdapter()
+        //remoteMediatorDataAdapter = TaskRemoteMediatorDataAdapter()
+        taskUiModelAdapter = TaskUiModelAdapter()
 
         //set recyclerview
         binding.listItemRemoteMediator.apply {
             //layoutManager = linearLayoutManager
-            adapter = remoteMediatorDataAdapter
+            //adapter = remoteMediatorDataAdapter
+            adapter = taskUiModelAdapter
         }
 
         binding.listItemRemoteMediator.adapter =
-            remoteMediatorDataAdapter.withLoadStateHeaderAndFooter(
+            taskUiModelAdapter.withLoadStateHeaderAndFooter(
                 header = TaskLoadStateAdapter{
                     remoteMediatorDataAdapter.retry()},
                 footer = TaskLoadStateAdapter{
@@ -86,7 +90,7 @@ class FlowRemoteMediatorFragment: Fragment() {
             )
 
         //load state
-        remoteMediatorDataAdapter.addLoadStateListener {
+        taskUiModelAdapter.addLoadStateListener {
             loadState->
             binding.pgRemoteMediator.isVisible =
                 loadState.source.refresh is LoadState.Loading
@@ -114,9 +118,9 @@ class FlowRemoteMediatorFragment: Fragment() {
     @ExperimentalPagingApi
     private fun observers(){
         lifecycleScope.launch {
-            viewModel.getTaskList()
+            viewModel.getTaskListUiModel()
                 .collectLatest {
-                    remoteMediatorDataAdapter.submitData(lifecycle,it)
+                    taskUiModelAdapter.submitData(lifecycle,it)
 
                 }
         }
